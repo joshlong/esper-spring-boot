@@ -20,7 +20,10 @@ Add the dependency to your build:
     </dependency>
 ```
 
-Spring Boot manages the version of some libraries that this library in turn depends on. So, you'll need to override the version managed by Spring Boot and _downgrade_ it:
+Spring Boot manages the version of some libraries that this library in turn depends on. So, you'll need to override the version managed by Spring Boot and _downgrade_ it. 
+
+### Apache Maven
+Override the property in the `<properties>` stanza of your application's build:
 
 ```xml 
 <properties>
@@ -28,6 +31,14 @@ Spring Boot manages the version of some libraries that this library in turn depe
     <janino.version>3.1.0</janino.version>
 </properties>
 ``` 
+
+### Gradle
+
+Override the project's `ext[]` dictionary key for the property:
+
+```groovy 
+project.ext["janino.version" ] = '3.1.6'
+```
 
 
 ## Java 

@@ -11,13 +11,12 @@
     <groupId>com.joshlong</groupId>
     <artifactId>esper-spring-boot-starter</artifactId>
     <version>0.0.2-SNAPSHOT</version>
-    <name>esper-spring-boot-starter</name>
     <description>Autoconfiguration for the Esper Complex Event Processing engine</description>
     <properties>
         <spring-javaformat-maven-plugin.version>0.0.35</spring-javaformat-maven-plugin.version>
         <java.version>17</java.version>
-        <esper.version>8.4.0</esper.version>
-        <antlr4-runtime.version>4.9.3</antlr4-runtime.version>
+        <esper.version>8.8.0</esper.version>
+        <janino.version>3.1.6</janino.version>
     </properties>
     <developers>
         <developer>
@@ -38,8 +37,9 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+
     <dependencies>
-<!--        <dependency>
+        <dependency>
             <groupId>org.codehaus.janino</groupId>
             <artifactId>janino</artifactId>
             <version>${janino.version}</version>
@@ -48,36 +48,16 @@
             <groupId>org.codehaus.janino</groupId>
             <artifactId>commons-compiler</artifactId>
             <version>${janino.version}</version>
-        </dependency>-->
+        </dependency>
         <dependency>
             <version>${esper.version}</version>
             <groupId>com.espertech</groupId>
             <artifactId>esper-compiler</artifactId>
-           <!-- <exclusions>
-                <exclusion>
-                    <groupId>org.codehaus.janino</groupId>
-                    <artifactId>janino</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.janino</groupId>
-                    <artifactId>commons-compiler</artifactId>
-                </exclusion>
-            </exclusions>-->
         </dependency>
         <dependency>
             <version>${esper.version}</version>
             <groupId>com.espertech</groupId>
             <artifactId>esper-runtime</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.codehaus.janino</groupId>
-                    <artifactId>janino</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.janino</groupId>
-                    <artifactId>commons-compiler</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -155,7 +135,6 @@
     </profiles>
     <build>
         <plugins>
-
             <plugin>
                 <inherited>true</inherited>
                 <groupId>io.spring.javaformat</groupId>

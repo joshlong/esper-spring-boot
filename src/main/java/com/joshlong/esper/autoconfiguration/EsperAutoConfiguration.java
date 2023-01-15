@@ -18,7 +18,12 @@ import java.util.List;
 
 /**
  * Provides default implementations of much of the infrastructure required to run the
- * Esper CEP engine.
+ * Esper CEP engine embedded in a Java Spring Boot 3 application
+ *
+ * <br/>
+ * NB: this module does <EM>not yet</EM> try to provide AOT configuration for Esper as
+ * Esper provides, basically, its own programming language in its query language. It's
+ * hard to effectively turn that into a GraalVM native image.
  *
  * @author Josh Long
  */
@@ -26,45 +31,45 @@ import java.util.List;
 @AutoConfiguration
 class EsperAutoConfiguration {
 
-    private final Logger log  = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Bean
-    @ConditionalOnMissingBean
-    EPCompiler esperCompiler() {
-        return EPCompilerProvider.getCompiler();
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	EPCompiler esperCompiler() {
+		return EPCompilerProvider.getCompiler();
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    com.espertech.esper.common.client.configuration.Configuration esperConfiguration(
-            @Autowired(required = false) EsperConfigurationCustomizer[] configurationCustomizers) throws Exception {
-        var listOfConfigs = !(null == configurationCustomizers || configurationCustomizers.length == 0)
-                ? new ArrayList<>(List.of(configurationCustomizers)) : new ArrayList<EsperConfigurationCustomizer>();
-        if (listOfConfigs.size() == 0)
-            log.warn("you probably should configure at least one bean of type "
-                    + EsperConfigurationCustomizer.class.getSimpleName() + "...");
-        var esperConfiguration = new com.espertech.esper.common.client.configuration.Configuration();
-        for (var cc : listOfConfigs)
-            cc.customize(esperConfiguration);
-        return esperConfiguration;
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	com.espertech.esper.common.client.configuration.Configuration esperConfiguration(
+			@Autowired(required = false) EsperConfigurationCustomizer[] configurationCustomizers) throws Exception {
+		var listOfConfigs = !(null == configurationCustomizers || configurationCustomizers.length == 0)
+				? new ArrayList<>(List.of(configurationCustomizers)) : new ArrayList<EsperConfigurationCustomizer>();
+		if (listOfConfigs.size() == 0)
+			log.warn("you probably should configure at least one bean of type "
+					+ EsperConfigurationCustomizer.class.getSimpleName() + "...");
+		var esperConfiguration = new com.espertech.esper.common.client.configuration.Configuration();
+		for (var cc : listOfConfigs)
+			cc.customize(esperConfiguration);
+		return esperConfiguration;
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    EPRuntime esperRuntime(com.espertech.esper.common.client.configuration.Configuration configuration) {
-        return EPRuntimeProvider.getDefaultRuntime(configuration);
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	EPRuntime esperRuntime(com.espertech.esper.common.client.configuration.Configuration configuration) {
+		return EPRuntimeProvider.getDefaultRuntime(configuration);
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    EPDeploymentService esperDeploymentService(EPRuntime runtime) {
-        return runtime.getDeploymentService();
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	EPDeploymentService esperDeploymentService(EPRuntime runtime) {
+		return runtime.getDeploymentService();
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    EPEventService esperEventService(EPRuntime runtime) {
-        return runtime.getEventService();
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	EPEventService esperEventService(EPRuntime runtime) {
+		return runtime.getEventService();
+	}
 
 }

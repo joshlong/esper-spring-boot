@@ -6,18 +6,20 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.0.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.joshlong</groupId>
     <artifactId>esper-spring-boot-starter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>esper-spring-boot-starter</name>
     <description>Autoconfiguration for the Esper Complex Event Processing engine</description>
     <properties>
+
         <spring-javaformat-maven-plugin.version>0.0.35</spring-javaformat-maven-plugin.version>
         <java.version>17</java.version>
         <esper.version>8.8.0</esper.version>
         <janino.version>3.1.0</janino.version>
+        <antlr4-runtime.version>4.9.3</antlr4-runtime.version>
     </properties>
     <developers>
         <developer>
@@ -38,6 +40,80 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>janino</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>commons-compiler</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.espertech</groupId>
+                <artifactId>esper-compiler</artifactId>
+                <version>${esper.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.codehaus.janino</groupId>
+                        <artifactId>janino</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.codehaus.janino</groupId>
+                        <artifactId>commons-compiler</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.espertech</groupId>
+                <artifactId>esper-runtime</artifactId>
+                <version>${esper.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.codehaus.janino</groupId>
+                        <artifactId>janino</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.codehaus.janino</groupId>
+                        <artifactId>commons-compiler</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>commons-compiler</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.espertech</groupId>
+            <artifactId>esper-compiler</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.espertech</groupId>
+            <artifactId>esper-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <profiles>
         <profile>
             <id>publish</id>
@@ -106,6 +182,7 @@
 
     <build>
         <plugins>
+
             <plugin>
                 <inherited>true</inherited>
                 <groupId>io.spring.javaformat</groupId>
@@ -136,50 +213,6 @@
         </repository>
 
     </distributionManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.janino</groupId>
-            <artifactId>janino</artifactId>
-            <version>${janino.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.janino</groupId>
-            <artifactId>commons-compiler</artifactId>
-            <version>${janino.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.espertech</groupId>
-            <artifactId>esper-compiler</artifactId>
-            <version>${esper.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.espertech</groupId>
-            <artifactId>esper-runtime</artifactId>
-            <version>${esper.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.espertech</groupId>
-            <artifactId>esper-common</artifactId>
-            <version>${esper.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

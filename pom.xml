@@ -16,10 +16,8 @@
     <properties>
         <spring-javaformat-maven-plugin.version>0.0.35</spring-javaformat-maven-plugin.version>
         <java.version>17</java.version>
-        <esper.version>8.8.0</esper.version>
-<!--        <janino.version>3.1.0</janino.version>-->
+        <esper.version>8.4.0</esper.version>
         <antlr4-runtime.version>4.9.3</antlr4-runtime.version>
-        <janino.version>3.1.6</janino.version>
     </properties>
     <developers>
         <developer>
@@ -30,9 +28,9 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git://github.com/bootiful-spring-graalvm/hints.git</connection>
-        <developerConnection>scm:git:ssh://github.com/bootiful-spring-graalvm/hints.git</developerConnection>
-        <url>https://github.com/bootiful-spring-graalvm/hints/tree/main</url>
+        <connection>scm:git:git://github.com/joshlong/esper-spring-boot.git</connection>
+        <developerConnection>scm:git:ssh://github.com/joshlong/esper-spring-boot.git</developerConnection>
+        <url>https://github.com/joshlong/esper-spring-boot.git/tree/main</url>
     </scm>
     <licenses>
         <license>
@@ -41,7 +39,7 @@
         </license>
     </licenses>
     <dependencies>
-        <dependency>
+<!--        <dependency>
             <groupId>org.codehaus.janino</groupId>
             <artifactId>janino</artifactId>
             <version>${janino.version}</version>
@@ -50,12 +48,12 @@
             <groupId>org.codehaus.janino</groupId>
             <artifactId>commons-compiler</artifactId>
             <version>${janino.version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <version>${esper.version}</version>
             <groupId>com.espertech</groupId>
             <artifactId>esper-compiler</artifactId>
-            <exclusions>
+           <!-- <exclusions>
                 <exclusion>
                     <groupId>org.codehaus.janino</groupId>
                     <artifactId>janino</artifactId>
@@ -64,7 +62,7 @@
                     <groupId>org.codehaus.janino</groupId>
                     <artifactId>commons-compiler</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
         </dependency>
         <dependency>
             <version>${esper.version}</version>
@@ -91,13 +89,11 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <profiles>
         <profile>
             <id>publish</id>
             <build>
                 <plugins>
-
 
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
@@ -157,7 +153,6 @@
         </profile>
 
     </profiles>
-
     <build>
         <plugins>
 
@@ -191,6 +186,4 @@
         </repository>
 
     </distributionManagement>
-
-
 </project>

@@ -10,7 +10,8 @@
     </parent>
     <groupId>com.joshlong</groupId>
     <artifactId>esper-spring-boot-starter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
+<!--    <version>0.0.1-SNAPSHOT</version>-->
     <description>Autoconfiguration for the Esper Complex Event Processing engine</description>
     <properties>
         <spring-javaformat-maven-plugin.version>0.0.35</spring-javaformat-maven-plugin.version>

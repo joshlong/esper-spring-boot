@@ -33,11 +33,10 @@
     </scm>
     <licenses>
         <license>
-            <name>The Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <name>GNU GENERAL PUBLIC LICENSE</name>
+            <url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</url>
         </license>
     </licenses>
-
     <dependencies>
         <dependency>
             <groupId>org.codehaus.janino</groupId>

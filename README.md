@@ -16,7 +16,7 @@ Add the dependency to your build:
     <dependency>
         <groupId>com.joshlong</groupId>
         <artifactId>esper-spring-boot-starter</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.1</version>
     </dependency>
 ```
 

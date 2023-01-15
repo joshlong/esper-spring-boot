@@ -47,6 +47,8 @@ At a minimum you'll probably want to contribute the `.class` literal definitions
 
 You'll then want to use the autoconfigured `EPCompiler`, `EPDeploymentService`, etc., to define and deploy some queries and their handlers, perhaps in an `InitializingBean`?
 
+Here's [a more full-fledged example](https://github.com/coffee-software-show/complex-event-processsing-with-esper).
+
 ## License
 
 Normally, I'd make my libraries Apache 2 Licensed, but this library links to Esper, which in turn is GPL2. Please be aware of this before linking to this library! 

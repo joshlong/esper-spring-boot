@@ -28,7 +28,7 @@ Override the property in the `<properties>` stanza of your application's build:
 ```xml 
 <properties>
     <!-- ... -->
-    <janino.version>3.1.0</janino.version>
+    <janino.version>3.1.6</janino.version>
 </properties>
 ``` 
 
